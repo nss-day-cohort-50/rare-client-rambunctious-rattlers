@@ -9,24 +9,18 @@ export const Login = () => {
     const invalidDialog = useRef()
     const history = useHistory()
 
+    
+    
     const handleLogin = (e) => {
         e.preventDefault()
 
-        return fetch("http://127.0.0.1:8088/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                username: email.current.value,
-                password: password.current.value
-            })
-        })
+        return fetch("http://127.0.0.1:8088/users")
             .then(res => res.json())
             .then(res => {
-                if ("valid" in res && res.valid) {
-                    localStorage.setItem("rare_user_id", res.token )
+                const foundUser = res.find(user => user?.email === email.current.value)
+                // code runs only if there is a found user AND the password matches
+                if (foundUser && foundUser.password === password.current.value) {
+                    localStorage.setItem("rare_user_id", foundUser.id)
                     history.push("/")
                 }
                 else {
