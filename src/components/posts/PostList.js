@@ -22,10 +22,11 @@ export const PostList = (props) => {
 
                 {
                     posts.map((post) => {
-                       
+                        debugger
                         if (post?.user_id === parseInt(localStorage.getItem("rare_user_id"))) {
+                            
                             return <>
-
+                                
                                 <div className="space-between">
                                     <h4 className="mp-title">Title: {post.title}</h4>
                                     <p>Author: {post.user.first_name} {post.user.last_name}</p>
