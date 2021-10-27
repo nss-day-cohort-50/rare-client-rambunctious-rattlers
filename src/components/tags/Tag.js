@@ -1,9 +1,9 @@
-
+import React from "react"
 
 export const Tag = ({ singleTag }) => {
 
 
-    return (
+return (
         <>
             <div>
                 <p>{singleTag.label}</p>

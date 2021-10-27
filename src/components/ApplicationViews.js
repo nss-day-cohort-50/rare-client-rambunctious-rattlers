@@ -1,6 +1,7 @@
 import React from "react"
 import { Route } from "react-router-dom"
 import { PostList } from "./posts/PostList"
+import { TagList } from "./tags/TagList"
 
 export const ApplicationViews = () => {
     return <>
