@@ -22,7 +22,6 @@ export const PostList = (props) => {
 
                 {
                     posts.map((post) => {
-                        debugger
                         if (post?.user_id === parseInt(localStorage.getItem("rare_user_id"))) {
                             
                             return <>
@@ -36,8 +35,8 @@ export const PostList = (props) => {
                                     
 
                                     {/* <div className="buttons">
-                                        <Button value={entry.id} onClick={() => { editEntry(entry.id) }}>EDIT</Button>
-                                        <Button className="btn btn-secondary delete" value={entry.id} onClick={() => { deleteEntry(entry.id) }}>DELETE</Button>
+                                        <button value={entry.id} onClick={() => { editEntry(entry.id) }}>EDIT</Button>
+                                        <button className="btn btn-secondary delete" value={entry.id} onClick={() => { deleteEntry(entry.id) }}>DELETE</Button>
 
                                     </div> */}
                                 </div>
