@@ -1,5 +1,6 @@
 import React from "react"
 import { Route } from "react-router-dom"
+import { PostList } from "./posts/PostList"
 
 export const ApplicationViews = () => {
     return <>
@@ -8,5 +9,8 @@ export const ApplicationViews = () => {
             lineHeight: "1.75rem"
         }}>
         </main>
+        <Route exact path="/posts">
+                <PostList />
+        </Route>
     </>
 }

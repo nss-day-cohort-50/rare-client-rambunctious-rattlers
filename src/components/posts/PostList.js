@@ -1,38 +1,39 @@
 import React, { useState, useEffect } from "react"
 import { useHistory, Link } from "react-router-dom"
-import { getAllPosts } from "./PostManager.js";
+import { getAllPosts } from "./PostManager";
 
-export const Entries = (props) => {
+export const PostList = (props) => {
     console.log(props)
     const history = useHistory()
     const [posts, setPosts] = useState([])
 
 
-
-    const UserPostList =
         useEffect(() => {
-            getAllPosts()
-                .then(data => setPosts(data))
+            return fetch("http://localhost:8088/posts")
+            .then(res => res.json())
+            .then(data => setPosts(data))
         }, [])
 
 
     return (
         <>
 
-            <h2 className="title title-out-of-form">Your Posts</h2>
-            <div id="entry">
+            <h2 className="title">Your Posts</h2>
+            <div className="allPosts">
 
                 {
                     posts.map((post) => {
-                        if (post?.userId === parseInt(localStorage.getItem("lu_token"))) {
+                       
+                        if (post?.user_id === parseInt(localStorage.getItem("rare_user_id"))) {
                             return <>
 
                                 <div className="space-between">
-                                    <h4 className="mp-title">{post.title}</h4>
-                                    <p> <span className="check-in-categories">MORNING PAGE: </span> {post.publication_date}</p>
-                                    <p> <span className="check-in-categories">BLURT:</span> {post.content}</p>
-                                    <p> <span className="check-in-categories">BLURT:</span> {post.category.name}</p>
-                                    <p> <span className="check-in-categories">BLURT:</span> {post.user_id.}</p>
+                                    <h4 className="mp-title">Title: {post.title}</h4>
+                                    <p>Author: {post.user.first_name} {post.user.last_name}</p>
+                                    <p>Date: {post.publication_date}</p>
+                                    <p>{post.content}</p>
+                                    <p>Category: {post.category.label}</p>
+                                    
 
                                     {/* <div className="buttons">
                                         <Button value={entry.id} onClick={() => { editEntry(entry.id) }}>EDIT</Button>
