@@ -34,6 +34,10 @@ export const CategoryList = () => {
         .then(() => history.push("/Categories"))
         setViewForm(false)
     }
+    const handleDelete = (id) => {
+        deleteCategory(id)
+        .then(getCategories().then(categoriesData => setCategories(categoriesData)))
+    }
         
     return (
 
@@ -43,7 +47,13 @@ export const CategoryList = () => {
                 {
                     categories.sort((a,b) => a.label.toLowerCase().localeCompare(b.label.toLowerCase())).map(category => {
                         return <section className="category" key={category.id}>
-                            {category.label} <button className='delete-btn' onClick={deleteCategory(category.id)}>delete</button>
+                            {category.label} <button  
+                            onClick={evt => {
+                                evt.preventDefault()
+                                handleDelete(category.id)
+                                }}
+                                className='delete-btn'>
+                                    delete</button>
                         </section>
                     })
                 }
