@@ -12,5 +12,8 @@ export const ApplicationViews = () => {
         <Route exact path="/posts">
                 <PostList />
         </Route>
+        <Route exact path="/tags">
+                <TagList />
+        </Route>
     </>
 }
