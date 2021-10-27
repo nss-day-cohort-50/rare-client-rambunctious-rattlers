@@ -9,8 +9,7 @@ export const PostList = (props) => {
 
 
         useEffect(() => {
-            return fetch("http://localhost:8088/posts")
-            .then(res => res.json())
+            getAllPosts()
             .then(data => setPosts(data))
         }, [])
 
