@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { CategoryForm } from "./CategoryForm"
-import { getCategories } from "./CategoryManager"
+import { deleteCategory, getCategories } from "./CategoryManager"
 import { createCategory } from "./CategoryManager"
 
 
@@ -43,7 +43,7 @@ export const CategoryList = () => {
                 {
                     categories.sort((a,b) => a.label.toLowerCase().localeCompare(b.label.toLowerCase())).map(category => {
                         return <section className="category" key={category.id}>
-                            {category.label}
+                            {category.label} <button className='delete-btn' onClick={deleteCategory(category.id)}>delete</button>
                         </section>
                     })
                 }
