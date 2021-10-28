@@ -36,8 +36,6 @@ export const PostList = (props) => {
                     )
                 }
 
-                {/* <button className="btn btn-secondary" onClick={() => history.push("/")}>
-                    HOME</button> */}
             </div>
 
         </>
