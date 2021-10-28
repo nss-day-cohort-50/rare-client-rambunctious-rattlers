@@ -1,6 +1,7 @@
 import React from "react"
 import { Route } from "react-router-dom"
 import { CategoryList } from "./category/CategoryList"
+import { PostDetails } from "./posts/PostDetail"
 import { PostList } from "./posts/PostList"
 import { TagList } from "./tags/TagList"
 
@@ -13,6 +14,9 @@ export const ApplicationViews = () => {
         </main>
         <Route exact path="/posts">
                 <PostList />
+        </Route>
+        <Route exact path="/posts/:postId(\d+)">
+                <PostDetails />
         </Route>
         <Route exact path="/tags">
                 <TagList />
