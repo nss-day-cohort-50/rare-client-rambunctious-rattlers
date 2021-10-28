@@ -8,8 +8,7 @@ export const TagList = () => {
 
     useEffect(() => {
             getAllTags()
-            .then((data) => setTags(data))
-        },[])
+            .then((data) => setTags(data))},[])
 
     return (
         <>
