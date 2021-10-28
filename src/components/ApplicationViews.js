@@ -6,6 +6,7 @@ import { UserPostList } from "./posts/UserPostList"
 import { PostDetails } from "./posts/PostDetail"
 import { PostList } from "./posts/PostList"
 import { TagList } from "./tags/TagList"
+import { CommentForm } from "./comments/CommentForm"
 
 export const ApplicationViews = () => {
     return (
@@ -27,6 +28,9 @@ export const ApplicationViews = () => {
         </Route>
         <Route exact path="/tags">
                 <TagList />
+        </Route>
+        <Route exact path="/commentForm">
+                <CommentForm />
         </Route>
         </>
     )
