@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { getAllTags } from "./TagProvider";
+import { getAllTags } from "./TagManager";
 import { Tag } from "./Tag";
 
 export const TagList = () => {
     const [tags, setTags] = useState([])
 
+    const getTagList = () => {
+        getAllTags()
+        .then((data) => setTags(data), [])
+    }
 
     useEffect(() => {
-            getAllTags()
-            .then((data) => setTags(data))},[])
+        getTagList()}, [])
+        
 
     return (
         <>
