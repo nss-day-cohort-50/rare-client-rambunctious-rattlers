@@ -14,9 +14,9 @@ export const createCategory = employee => {
         .then(getCategories)
 }
 
-export const deleteCategory = (categoryId) => {
+export const deleteCategory = (categoryId, func) => {
     return fetch(`http://localhost:8088/categories/${categoryId}`, {
         method: "DELETE"
     })
-        .then(getCategories)
+        .then(func)
 }
