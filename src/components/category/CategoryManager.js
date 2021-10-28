@@ -20,3 +20,19 @@ export const deleteCategory = (categoryId, func) => {
     })
         .then(func)
 }
+
+export const getCategoryById = (id) => {
+    return fetch(`http://localhost:8088/categories/${id}`)
+        .then(res => res.json())
+}
+
+export const updateCategory = category => {
+    return fetch(`http://localhost:8088/categories/${category.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(category)
+    })
+        .then()
+}
