@@ -2,6 +2,7 @@ import React from "react"
 import { Route } from "react-router-dom"
 import { CategoryList } from "./category/CategoryList"
 import { CategoryForm } from "./category/CategoryForm"
+import { UserPostList } from "./posts/UserPostList"
 import { PostList } from "./posts/PostList"
 import { TagList } from "./tags/TagList"
 
@@ -13,6 +14,9 @@ export const ApplicationViews = () => {
         </Route>
         <Route exact path='/Categories/:categoryId(\d+)'>
             <CategoryForm />
+        </Route>
+        <Route exact path="/userPosts">
+                <UserPostList />
         </Route>
         <Route exact path="/posts">
                 <PostList />
