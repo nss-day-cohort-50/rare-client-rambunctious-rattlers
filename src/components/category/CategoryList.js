@@ -8,7 +8,6 @@ import { createCategory } from "./CategoryManager"
 export const CategoryList = () => {
     const [ categories, setCategories ] = useState([])
     const [ viewForm, setViewForm ] = useState(false)
-    const [ render, setRender ] = useState(false)
     const label = useRef(null)
     const history = useHistory()
     
@@ -18,7 +17,7 @@ export const CategoryList = () => {
 
     useEffect(() => {
         getCategoryList()
-    }, [viewForm, render])
+    }, [viewForm])
 
     useEffect(() => {
         console.log("catData:", categories)
@@ -40,8 +39,8 @@ export const CategoryList = () => {
         setViewForm(false)
     }
     
-    const handleDelete = (id) => {
-        deleteCategory(id)
+    const handleDelete = (id, func) => {
+        deleteCategory(id, func)
     }
         
     return (
@@ -53,13 +52,10 @@ export const CategoryList = () => {
                     categories.sort((a,b) => a.label.toLowerCase().localeCompare(b.label.toLowerCase())).map(category => {
                         return <section className="category" key={category.id}>
                             {category.label} <button  
-                            onClick={evt => {
-                                evt.preventDefault()
-                                handleDelete(category.id)
-                                getCategoryList()
-                                }}
-                                className='delete-btn'>
-                                    delete</button>
+                            onClick={() => handleDelete(category.id, getCategoryList)
+                            }
+                            className='delete-btn'>
+                                delete</button>
                         </section>
                     })
                 }
