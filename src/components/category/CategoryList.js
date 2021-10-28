@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { CategoryForm } from "./CategoryForm"
-import { getCategories } from "./CategoryManager"
+import { deleteCategory, getCategories } from "./CategoryManager"
 import { createCategory } from "./CategoryManager"
 
 
@@ -11,8 +11,12 @@ export const CategoryList = () => {
     const label = useRef(null)
     const history = useHistory()
     
-    useEffect(() => {
+    const getCategoryList = () => {
         getCategories().then(categoriesData => setCategories(categoriesData))
+    }
+
+    useEffect(() => {
+        getCategoryList()
     }, [viewForm])
 
     useEffect(() => {
@@ -34,6 +38,10 @@ export const CategoryList = () => {
         .then(() => history.push("/Categories"))
         setViewForm(false)
     }
+    
+    const handleDelete = (id, func) => {
+        deleteCategory(id, func)
+    }
         
     return (
 
@@ -43,7 +51,11 @@ export const CategoryList = () => {
                 {
                     categories.sort((a,b) => a.label.toLowerCase().localeCompare(b.label.toLowerCase())).map(category => {
                         return <section className="category" key={category.id}>
-                            {category.label}
+                            {category.label} <button  
+                            onClick={() => handleDelete(category.id, getCategoryList)
+                            }
+                            className='delete-btn'>
+                                delete</button>
                         </section>
                     })
                 }
