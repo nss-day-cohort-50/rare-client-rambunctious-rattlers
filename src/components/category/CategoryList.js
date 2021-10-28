@@ -55,7 +55,11 @@ export const CategoryList = () => {
                             onClick={() => handleDelete(category.id, getCategoryList)
                             }
                             className='delete-btn'>
-                                delete</button>
+                                delete</button> 
+                            <button onClick={() => history.push(`/categories/${category.id}`)
+                            }
+                            className='delete-btn'>
+                                edit</button> 
                         </section>
                     })
                 }
@@ -71,7 +75,7 @@ export const CategoryList = () => {
                 <fieldset>
                     <div className="form-group">
                         <label htmlFor="categoryLabel">Label for Category: </label>
-                        <input type="text" id="categoryLabel" ref={label} required autoFocus className="form-control" placeholder="label" />
+                        <input type="text" id="" ref={label} required autoFocus className="form-control" placeholder="label" />
                     </div>
                 </fieldset>
                 <button type="submit"
