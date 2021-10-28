@@ -55,7 +55,7 @@ export const CategoryForm = () => {
                 }}
                 className="btn btn-primary">
                 Update Category
-            </button>
+            </button><button onClick={()=> history.push('/Categories')}>Cancel</button>
         </form>
     )
 }
