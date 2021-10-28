@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from "react"
 import { useHistory, Link } from "react-router-dom"
-import { getAllPosts } from "./PostManager";
+import { getAllPosts, deletePost } from "./PostManager";
 
 export const PostList = (props) => {
     console.log(props)
     const history = useHistory()
     const [posts, setPosts] = useState([])
 
-
+const something = ()=>{
+    getAllPosts()
+    .then(data => setPosts(data))
+}
         useEffect(() => {
-            getAllPosts()
-            .then(data => setPosts(data))
+         something() 
         }, [])
 
+        const deletePost = (postId) => {
+          fetch(`http://localhost:8088/posts/${postId}`, {
+                method: "DELETE"
+            })
+                .then(something)
+        }
 
     return (
         <>
@@ -34,11 +42,11 @@ export const PostList = (props) => {
                                     <p>Category: {post.category.label}</p>
                                     
 
-                                    {/* <div className="buttons">
-                                        <button value={entry.id} onClick={() => { editEntry(entry.id) }}>EDIT</Button>
-                                        <button className="btn btn-secondary delete" value={entry.id} onClick={() => { deleteEntry(entry.id) }}>DELETE</Button>
+                                    <div className="buttons">
+                                        {/* <button value={entry.id} onClick={() => { editEntry(entry.id) }}>EDIT</button> */}
+                                        <button className="btn" value={post.id} onClick={() => { deletePost(post.id) }}>DELETE</button>
 
-                                    </div> */}
+                                    </div>
                                 </div>
                             </>
 
