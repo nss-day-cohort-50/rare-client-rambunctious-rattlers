@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useHistory, Link } from "react-router-dom"
-import { getAllPosts } from "./PostManager";
+import { getAllPosts, deletePost, fetchPosts } from "./PostManager";
 
 export const PostList = (props) => {
     console.log(props)
@@ -8,11 +8,14 @@ export const PostList = (props) => {
     const [posts, setPosts] = useState([])
 
 
-        useEffect(() => {
-            getAllPosts()
-            .then(data => setPosts(data))
-        }, [])
+    const fetchPosts = ()=>{
+        getAllPosts()
+        .then(data => setPosts(data))
+    } 
 
+    useEffect(() => {
+        fetchPosts() 
+    }, [])
 
     return (
         <>
@@ -22,6 +25,8 @@ export const PostList = (props) => {
 
                 {
                     posts.map((post) => {
+                        if (post?.user_id === parseInt(localStorage.getItem("rare_user_id"))) {
+                            
                             return <>
                                 
                                 <div className="space-between">
@@ -30,14 +35,19 @@ export const PostList = (props) => {
                                     <p>Date: {post.publication_date}</p>
                                     <p>{post.content}</p>
                                     <p>Category: {post.category.label}</p>
-                                    <button onClick={() => history.push(`/commentForm/${post.id}`)
-                                        }
-                                        className='comment-btn'>
-                                            Add Comment</button> 
+                                    <button onClick={() => history.push(`/commentForm/${post.id}`)}
+                                        className='comment-btn'>Add Comment</button> 
+                                    <div className="buttons">
+                                        {/* <button value={entry.id} onClick={() => { editEntry(entry.id) }}>EDIT</button> */}
+                                        <button className="btn" value={post.id} onClick={() => { deletePost(post.id, fetchPosts) }}>DELETE</button>
+
+                                    </div>
                                 </div>
                             </>
                         }
-                    )
+                    }
+                )
+                
                 }
 
             </div>

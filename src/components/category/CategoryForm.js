@@ -3,20 +3,23 @@ import { useHistory, useParams } from 'react-router-dom'
 import { getCategoryById, updateCategory } from "./CategoryManager"
 
 export const CategoryForm = () => {
-    const label = useRef(null)
     const { categoryId } = useParams()
     const [ category, setCategory] = useState({})
+    const [ label, setLabel] = useState('')
     const history = useHistory()
 
     useEffect(() => {
         getCategoryById(categoryId).then((categoryData) => {
             setCategory(categoryData)
+            setLabel(categoryData.label)
         })
     }, [])
 
     useEffect(() => {
         console.log('catId', categoryId)
         console.log('cat', category)
+        console.log('label', label)
+
     }, [category])
 
     const handleControlledInputChange = (event) => {
@@ -40,11 +43,12 @@ export const CategoryForm = () => {
     return (
         <form className="employeeForm">
             <h2 className="employeeForm__title">Edit Category</h2>
-            <div key={category.id}>{category.label}</div>
+            <div key={category.id}>{label}</div>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="categoryLabel">Edit Label for Category: </label>
-                    <input type="text" id="categoryLabel" name="label" required autoFocus className="form-control" placeholder="label" 
+                    <input type="text" id="categoryLabel" name="label" required autoFocus className="form-control" 
+                    placeholder="label" 
                     onChange={handleControlledInputChange}/>
                 </div>
             </fieldset>
@@ -55,7 +59,7 @@ export const CategoryForm = () => {
                 }}
                 className="btn btn-primary">
                 Update Category
-            </button>
+            </button><button onClick={()=> history.push('/Categories')}>Cancel</button>
         </form>
     )
 }
