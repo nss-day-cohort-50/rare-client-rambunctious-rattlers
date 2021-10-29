@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useHistory, Link } from "react-router-dom"
-import { getAllPosts } from "./PostManager";
+import { getAllPosts, deletePost, fetchPosts } from "./PostManager";
 
 export const PostList = (props) => {
     console.log(props)
@@ -8,11 +8,14 @@ export const PostList = (props) => {
     const [posts, setPosts] = useState([])
 
 
-        useEffect(() => {
-            getAllPosts()
-            .then(data => setPosts(data))
-        }, [])
+    const fetchPosts = ()=>{
+        getAllPosts()
+        .then(data => setPosts(data))
+    } 
 
+    useEffect(() => {
+        fetchPosts() 
+    }, [])
 
     return (
         <>
@@ -22,7 +25,6 @@ export const PostList = (props) => {
 
                 {
                     posts.map((post) => {
-                      
                         if (post?.user_id === parseInt(localStorage.getItem("rare_user_id"))) {
                             
                             return <>
@@ -35,11 +37,11 @@ export const PostList = (props) => {
                                     <p>Category: {post.category.label}</p>
                                     
 
-                                    {/* <div className="buttons">
-                                        <Button value={entry.id} onClick={() => { editEntry(entry.id) }}>EDIT</Button>
-                                        <Button className="btn btn-secondary delete" value={entry.id} onClick={() => { deleteEntry(entry.id) }}>DELETE</Button>
+                                    <div className="buttons">
+                                        {/* <button value={entry.id} onClick={() => { editEntry(entry.id) }}>EDIT</button> */}
+                                        <button className="btn" value={post.id} onClick={() => { deletePost(post.id, fetchPosts) }}>DELETE</button>
 
-                                    </div> */}
+                                    </div>
                                 </div>
                             </>
 
