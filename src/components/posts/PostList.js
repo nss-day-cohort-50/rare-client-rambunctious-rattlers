@@ -6,6 +6,7 @@ export const PostList = (props) => {
     console.log(props)
     const history = useHistory()
     const [posts, setPosts] = useState([])
+    const [showComments, setShowComments ] = useState(false)
 
 
     const fetchPosts = ()=>{
@@ -14,8 +15,21 @@ export const PostList = (props) => {
     } 
 
     useEffect(() => {
-        fetchPosts() 
+        fetchPosts()
+        console.log('posts', posts)
     }, [])
+    useEffect(() => {
+        console.log('posts', posts)
+    }, [posts])
+
+
+    const toggleForm = () => {
+        if (showComments == true) {
+            setShowComments(false)
+        } else {
+            setShowComments(true)
+        }
+    }
 
     return (
         <>
@@ -25,7 +39,6 @@ export const PostList = (props) => {
 
                 {
                     posts.map((post) => {
-                        if (post?.user_id === parseInt(localStorage.getItem("rare_user_id"))) {
                             
                             return <>
                                 
@@ -37,6 +50,18 @@ export const PostList = (props) => {
                                     <p>Category: {post.category.label}</p>
                                     <button onClick={() => history.push(`/commentForm/${post.id}`)}
                                         className='comment-btn'>Add Comment</button> 
+                                    { showComments ?
+                                        <button onClick={() => toggleForm()}>Hide Comments</button>
+                                        :
+                                        <button onClick={() => toggleForm()}>Show Comments</button>
+                                    }
+                                    { showComments ?
+                                        <ul>
+                                            <h3>{post.comment.subject}</h3>
+                                            <p>{post.comment.content}</p>
+                                        </ul>
+                                        : ""
+                                    }
                                     <div className="buttons">
                                         {/* <button value={entry.id} onClick={() => { editEntry(entry.id) }}>EDIT</button> */}
                                         <button className="btn" value={post.id} onClick={() => { deletePost(post.id, fetchPosts) }}>DELETE</button>
@@ -45,8 +70,7 @@ export const PostList = (props) => {
                                 </div>
                             </>
                         }
-                    }
-                )
+                    )
                 
                 }
 
