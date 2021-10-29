@@ -12,5 +12,6 @@ export const createNewTag = (newTag) => {
         },
         body: JSON.stringify(newTag)
     })
-        .then(getAllTags)
+        .then(res => res.json())
+        .then(getAllTags())
 }
