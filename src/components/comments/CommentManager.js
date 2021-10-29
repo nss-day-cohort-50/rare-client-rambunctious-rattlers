@@ -6,5 +6,4 @@ export const createComment = comment => {
         },
         body: JSON.stringify(comment)
     })
-        .then(getComments)
 }

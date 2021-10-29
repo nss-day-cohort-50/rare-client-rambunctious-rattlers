@@ -3,35 +3,43 @@ import { useHistory, useParams } from 'react-router-dom'
 import { createComment } from "./CommentManager"
 
 export const CommentForm = () => {
-    const comment = 'comment'
+    const content = useRef()
+    const subject = useRef()
+    const postId = useParams()
     const history = useHistory()
-
+    const userId = localStorage.getItem('rare_user_id')
     
-    const handleCreateComment = () => {
-        createComment({
-            subject: subject.current.value,
-            content: content.current.value
-        })
-        .then(() => history.push("/Categories"))
-        setViewForm(false)
+    const handleCreateComment = (e) => {
+        e.preventDefault()
+        const newComment = {
+            'subject': subject.current.value,
+            'content': content.current.value,
+            'user_id': parseInt(userId),
+            'post_id': parseInt(postId.postId),
+            'creation_date': ''
+        }
+
+        return createComment(newComment)
+        .then(() => history.push("/posts"))
     }
 
     return (
-        <form className="comment_form">
-            <h2 className="comment_form__title">New Category</h2>
+        <form className="comment_form" onSubmit={handleCreateComment}>
+            <h2 className="comment_form__title">New Comment</h2>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="categoryLabel">Label for Category: </label>
-                    <input type="text" id="" ref={label} required autoFocus className="form-control" placeholder="label" />
+                    <label htmlFor="categoryLabel">Subject:</label>
+                    <input type="text" id="" ref={subject} required autoFocus className="form-control" placeholder="label" />
                 </div>
             </fieldset>
-            <button type="submit"
-                onClick={evt => {
-                    evt.preventDefault() // Prevent browser from submitting the form
-                    handleCategoryAdd()
-                }}
-                className="btn btn-primary">
-                Save Category
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="categoryLabel">Comment:</label>
+                    <input type="text" id="" ref={content} required autoFocus className="form-control" placeholder="label" />
+                </div>
+            </fieldset>
+            <button type="submit"className="btn btn-primary">
+                Save Comment
             </button>
         </form>
     )

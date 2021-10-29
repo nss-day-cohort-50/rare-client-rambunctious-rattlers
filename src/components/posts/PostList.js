@@ -30,7 +30,7 @@ export const PostList = (props) => {
                                     <p>Date: {post.publication_date}</p>
                                     <p>{post.content}</p>
                                     <p>Category: {post.category.label}</p>
-                                    <button onClick={() => history.push(`/commentForm`)
+                                    <button onClick={() => history.push(`/commentForm/${post.id}`)
                                         }
                                         className='comment-btn'>
                                             Add Comment</button> 

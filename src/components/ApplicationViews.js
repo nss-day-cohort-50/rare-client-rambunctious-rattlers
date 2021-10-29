@@ -29,7 +29,7 @@ export const ApplicationViews = () => {
         <Route exact path="/tags">
                 <TagList />
         </Route>
-        <Route exact path="/commentForm">
+        <Route exact path="/commentForm/:postId(\d+)">
                 <CommentForm />
         </Route>
         </>
